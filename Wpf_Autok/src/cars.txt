@@ -1,0 +1,5 @@
+Ford;Focus;2015;black;FordFocus.jpg
+Porsche;911;1977;white;Porsche911.jpg
+BMW;M3;1998;red;BMWM3.jpg
+Peugeot;205 GTI;1991;green;PeugeotGTI.jpg
+Toyota;MR2;1985;red;ToyotaMR2.jpg
