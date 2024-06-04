@@ -23,9 +23,11 @@ namespace Wpf_Autok
             DataContext = this;
             List.ItemsSource = cars;
 
+            
+            
         }
 
-        private void AddToFavoriteButton_Click(object sender, RoutedEventArgs e)
+        private void AddToCartButton_Click(object sender, RoutedEventArgs e)
         {
             var selected = List.SelectedItem;
 
@@ -35,7 +37,7 @@ namespace Wpf_Autok
             }
         }
 
-        private void DeleteFromFavoriteButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteFromCartButton_Click(object sender, RoutedEventArgs e)
         {
             var selected = List.SelectedItem;
             if (selected != null && FavoriteList.Items.Contains(selected))
@@ -46,6 +48,19 @@ namespace Wpf_Autok
             {
                 MessageBox.Show("This car is not in Favorites!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void OnChange(object sender, TextChangedEventArgs e)
+        {
+            var searchInput = SearchBar.Text;
+            if (searchInput != "") SearchBarPlaceholder.Visibility = Visibility.Hidden;
+            else SearchBarPlaceholder.Visibility = Visibility.Visible;
+
+            var filteredCars = cars.Where(car => car.BrandName.ToLower().Contains(searchInput.ToLower()) ||
+                                                 car.Type.ToLower().Contains(searchInput.ToLower()))
+                                                 .ToList();
+
+            List.ItemsSource = filteredCars;
         }
     }
 }

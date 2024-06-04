@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -19,25 +19,18 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Cars" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Favorites" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Cart" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="SearchBar" TextChanged="OnChange" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="0,31,0,0"/>
+        <Label x:Name="SearchBarPlaceholder" Content="Search..." Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="26" Width="120" Background="Transparent" Opacity="0.5" IsHitTestVisible="False" Margin="0,27,0,0"/>
 
         <ListBox x:Name="List" ItemsSource="{Binding Cars}" Grid.Row="1" Grid.Column="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding BrandName, StringFormat='{}{0} '}" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Type, StringFormat='{}{0} | '}" VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <TextBlock Text="{Binding Type, StringFormat='{}{0} '}" VerticalAlignment="Center"/>
+
                         <TextBlock Text="{Binding Vintage, StringFormat='{}{0} | '}" VerticalAlignment="Center">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
@@ -88,8 +81,10 @@
 
         <ListBox x:Name="FavoriteList" Grid.Row="1" Grid.Column="1"/>
 
-        <Button Content="Add to favorites" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="AddToFavoriteButton_Click" Background="Green" Foreground="White" BorderBrush="Snow"/>
-        <Button Content="Delete from favorites" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DeleteFromFavoriteButton_Click" Background="Red" Foreground="White" BorderBrush="Snow"/>
+        <Button Content="Add to cart" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="AddToCartButton_Click" Background="Green" Foreground="White" BorderBrush="Snow"/>
+        <Button Content="Delete from cart" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Click="DeleteFromCartButton_Click" Background="Red" Foreground="White" BorderBrush="Snow"/>
+
+        
 
     </Grid>
 </Window>
